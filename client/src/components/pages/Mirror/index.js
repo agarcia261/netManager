@@ -28,22 +28,28 @@ class Mirror extends Component {
     });
   };
 
-  componentDidMount() {
+  loadMirrors = () => {
     axios
-      .get("/api/mirror")
-      // .then(json => console.log(json.data[0]))
-      .then(json => this.setState({ mirrorArr: json.data }))
-      .catch(err => console.log(err));
-    // console.log(mirrorArr)
+    .get("/api/mirror")
+    .then(res => this.setState({ mirrorArr: res.data }))
+    .catch(err => console.log(err));
+  };
+
+  componentDidMount() {
+    this.loadMirrors();
   }
 
+  componentDidUpdate(){
+    this.loadMirrors();
+  }
+  
   deleteMirror = id => {
     axios
       .delete("/api/mirror/" + id)
-      // .then(json => console.log(json.data[0]))
       .then(json => this.setState({ mirrorArr: json.data }))
       .catch(err => console.log(err));
   };
+
 
   // When the form is submitted, prevent the default event and alert the username and password
   handleFormSubmit = event => {
