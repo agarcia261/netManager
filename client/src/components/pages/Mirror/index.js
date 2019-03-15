@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Cards from "../../../components/Cards";
 import axios from "axios";
 import DateTime from "react-datetime";
+import moment from 'moment'
+import Cards from "../../../components/Cards";
 import "./style.css";
 
 class Mirror extends Component {
@@ -20,7 +21,7 @@ class Mirror extends Component {
   handleInputChange = event => {
     // Pull the name and value properties off of the event.target (the element which triggered the event)
     const { name, value } = event.target;
-    console.log(event.target);
+    // console.log(event.target);
 
     // Set the state for the appropriate input field
     this.setState({
@@ -77,14 +78,15 @@ class Mirror extends Component {
     );
   };
 
+
   //DateTime not available for past dates
   valid = current => {
     return current.isAfter(DateTime.moment().subtract(1, "day"));
   };
 
+  //render form and existing miror information
   render() {
     return (
-      //render form and miror information
       <div className="row">
         <form
           className="col s12 form-class"
@@ -148,17 +150,9 @@ class Mirror extends Component {
         ) : (
           <h3>No Current Mirrors</h3>
         )}
-
-        {/* display current mirrors */}
-        {/* {this.state.mirrorArr.length ? (
-          <Cards mirrorArr={this.state.mirrorArr}/>
-        ) : (
-          <h3>No Current Mirrors</h3>
-        )} */}
       </div>
     );
   }
 }
 
-// deleteMirror={this.removeMirror}
 export default Mirror;
