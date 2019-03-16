@@ -1,36 +1,15 @@
 import React from "react";
-import moment from 'moment'
+import Card from "../Card";
 
 function Cards (props){
     return (
         <div className="row">
              <h3>Current Mirrors</h3> 
 
-        {props.mirrorArr.map(mirrorArr => {
-            // let curenDate = (moment().format('LLLL'))
-            console.log(mirrorArr)
-            
-          return (
-            <div className="col s12 m12" key={mirrorArr._id}>
-                <h5 className="header">Router: {mirrorArr.router}</h5 >
-                <div className="card horizontal">
-                    
-                <div className="card-stacked">
-                    <div className="card-content">
-                        <p>Sap: {mirrorArr.sap}  Created on: {mirrorArr.createdOn} Expirstion:{moment(mirrorArr.expiration).format('LLLL')} TimeLeft: {moment(mirrorArr.expiration).fromNow()} </p>
-
-                        {/* <p>Sap: {mirrorArr.sap}  Created on: {mirrorArr.createdOn} Expiration: {mirrorArr.expiration} </p> */}
-
-
-                        <button className="btn-floating btn-large waves-effect waves-light red right" 
-                            onClick={() => props.deleteMirror(mirrorArr._id)} type="submit" name="action">X
-                            {/* <i className="material-icons right">add_circle</i> */}
-                        </button>
-                    </div>
-                </div>
-                </div>
-          </div>
+        {props.mirrorArr.map(mirror => {
            
+          return (
+           <Card mirror={mirror} deleteMirror={props.deleteMirror}/>
           )
         })}
         </div>
