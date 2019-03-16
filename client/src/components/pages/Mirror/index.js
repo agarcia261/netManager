@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 import DateTime from "react-datetime";
-import moment from 'moment'
-import Cards from "../../../components/Cards";
+import Tables from "../../../components/Tables";
 import "./style.css";
+
+
 
 class Mirror extends Component {
   // Setting the initial values for miror information
@@ -87,7 +88,8 @@ class Mirror extends Component {
   //render form and existing miror information
   render() {
     return (
-      <div className="row">
+      <div className="row content-container">
+      <h3 className="title">Add A New Mirror</h3>
         <form
           className="col s12 form-class"
           id="add-mirror"
@@ -124,13 +126,15 @@ class Mirror extends Component {
               <label className="dateTimeLabel" htmlFor="expiration">
                 Expiration
               </label>
-              <DateTime
+              <DateTime 
                 onChange={moment =>
                   this.handleDateTimePicker(moment, "expiration")
                 }
                 value={this.state.expiration}
                 isValidDate={this.valid}
+                inputProps={{readOnly:false}}
               />
+              
             </div>
 
             <button
@@ -141,15 +145,25 @@ class Mirror extends Component {
             </button>
           </div>
         </form>
-
-        {this.state.mirrorArr.length ? (
-          <Cards
+        {/* <h3 className="title">Current Mirror(s)</h3> */}
+          <div>
+          
+          {this.state.mirrorArr.length ? (
+          <Tables
             mirrorArr={this.state.mirrorArr}
             deleteMirror={this.deleteMirror}
           />
         ) : (
           <h3>No Current Mirrors</h3>
-        )}
+        )} 
+
+          </div>
+        
+ 
+
+
+
+
       </div>
     );
   }

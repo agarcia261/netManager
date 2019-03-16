@@ -1,5 +1,5 @@
 .content-container{
-	width: 95%;
+	width: 960px;
 	margin: auto;
 }
 .heading{
@@ -68,8 +68,13 @@
 .input-field{
 	margin: 22px;
 }
-.dateTimeLabell{
-	margin: 100px;
+
+.content-container{
+	padding: 30px;
+	/* background-color: teal; */
+	border: solid 2px gray;
+	text-align: center;
+	color:black;
 }
 /* Time and date css */
 
