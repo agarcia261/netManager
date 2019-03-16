@@ -6,7 +6,7 @@ const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const passport = require('passport')
-var session = require('express-session')
+const session = require('express-session')
 
 
 // Define middleware here
@@ -26,7 +26,7 @@ app.use(passport.session())
 app.use(require('flash')());
 
 //Global variables
-app.use(function (req, res, next){
+app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -44,15 +44,17 @@ app.use(routes);
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function(req, res) {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/netmanager";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/netmanager";
 console.log(MONGODB_URI)
-console.log("the URI is " +process.env.MONGODB_URI )
+console.log(`the URI is ${process.env.MONGODB_URI}`)
 mongoose.connect(MONGODB_URI);
 
-app.listen(PORT, function() {
+app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
+
+
