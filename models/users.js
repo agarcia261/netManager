@@ -35,7 +35,7 @@ const UserSchema = new Schema({
         trim:true,
         validate: [
             // Function takes in the new `password` value to be saved as an argument
-            function(input) {
+            input => {
               // If this returns true, proceed. If not, return the error message below
               return input.length >= 6;
             },

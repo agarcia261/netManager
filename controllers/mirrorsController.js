@@ -17,17 +17,17 @@ const db = require('../models')
 
 
 module.exports = {
-getMirrors: function (req, res){
+getMirrors: (req, res) => {
     db.Mirror.find({})
     .then(mirrors => {
-      var today = format(
+      const today = format(
         new Date(),
         'MM/DD/YYYY'
       )
-       var currentMirrors = mirrors
+       const currentMirrors = mirrors
 
-      for (var i=0; i<mirrors.length; i++ ){
-        var dateComparison = compareDesc(
+      for (let i=0; i<mirrors.length; i++ ){
+        const dateComparison = compareDesc(
           today,
           new Date(mirrors[i].expiration)
         )
@@ -41,11 +41,11 @@ getMirrors: function (req, res){
         }
         else{
 
-          var result = distanceInWords(
+          const result = distanceInWords(
             new Date(),
             new Date(mirrors[i].expiration)
           )
-          currentMirrors[i].expires="in "+result
+          currentMirrors[i].expires=`in ${result}`
 
     
         }
@@ -55,11 +55,11 @@ getMirrors: function (req, res){
 
     })
 },
-addMirror: function (req, res){
+addMirror: (req, res) => {
     console.log("getting here")
     console.log(req.body)
     //grab object that was sent from the front end:
-    var newMirror={
+    const newMirror={
         router:req.body.router,
         sap:req.body.sap,
         expiration:req.body.expiration
@@ -69,15 +69,16 @@ addMirror: function (req, res){
       .then(mirrorResult => {
         //now we need to create a timeout function so the mirror is deleted automatically once it expires
         //first we get the total time the program will wait before deleting it
-        var refDateInMilliseconds = getTimeDiff(new Date(mirrorResult.expiration),new Date())
+        const refDateInMilliseconds = getTimeDiff(new Date(mirrorResult.expiration),new Date())
   
         //now we create the function that will delete the mirror:
-        function deleteMirror(id){
-          db.Mirror.deleteOne({_id:id},function (err) {
+        const deleteMirror = id => {
+          db.Mirror.deleteOne({_id:id}, err => {
             if (err){
               console.log("Mirror Could not be deleted")
+            } else {
+              console.log("Mirror Deleted Successfully")
             }
-            console.log("Mirror Deleted Successfully")
           });
         }
 
@@ -86,19 +87,19 @@ addMirror: function (req, res){
         // if the program reboots for any reason as all instances will be lost 
         // it will probably make sense to store it in the db and have the backend 
         // reload all instances when it starts
-        var timeOutInstance = setTimeout(deleteMirror, refDateInMilliseconds, mirrorResult._id)
+        const timeOutInstance = setTimeout(deleteMirror, refDateInMilliseconds, mirrorResult._id)
         console.log(timeOutInstance)
 
         //###this answer below may need to change... this redirect should be done by react!#####
         res.json(mirrorResult)
       }) 
 },
-removeMirror: function (req, res){
+removeMirror: (req, res) => {
     console.log("getting to delete")
     console.log(req.params.id)
 
-    db.Mirror.deleteOne({_id:req.params.id},function (err) {
-        if (err){
+    db.Mirror.deleteOne({_id:req.params.id}, err => {
+        if (err) {
           return res.status(404).end();
         }
         return res.status(200).end();
