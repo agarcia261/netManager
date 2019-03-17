@@ -40,7 +40,7 @@ module.exports = {
                         }
                     }
                     splitArrays(resu)
-                    res.send(result)
+                    return result
 
                 })
 

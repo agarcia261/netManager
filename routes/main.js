@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const ssh = require("../controllers/ssh");
+const customer = require("../controllers/cusomersController");
 
 router.route("/")
-   .get(ssh.adminDisplay)
+   .get(customer.getCustomerStatus)
 //   .post(mirrorsController.addMirror);
 
 // Matches with "/api/mirrors/:id"
