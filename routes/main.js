@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const customer = require("../controllers/cusomersController");
+const customer = require("../controllers/customersController");
 
 router.route("/")
    .get(customer.getCustomerStatus)

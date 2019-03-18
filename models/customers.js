@@ -37,6 +37,9 @@ const CustomerSchema = new Schema({
                 type:Boolean,
                 default:false
             },
+            iesInterface:{
+                type:String
+            },
             vprn:{
                 type:Number
             },

@@ -1,11 +1,35 @@
-
-
-
-
+const sshAPI = require("./ssh")
+const axios = require('axios')
 
 
 module.exports = {
     getCustomerStatus: (req, res) => {
+
+        cb = input =>{
+            console.log("callback :")
+
+            return input
+        }
+        // if (test) {
+        //     console.log("I got something")
+        //     console.log(test)
+
+        // }
+        // else{
+            sshAPI.show('bgpsum','1030000001',2222, cb)
+            // sshAPI.show('arp','1030000001',undefined, cb)
+
+            // axios({
+            //     method:'get',
+            //     url:'http://localhost:3001/api/ssh/'
+            //   })
+            //   .then(resp => {
+            //     //   console.log(resp)
+            //   })
+        // }
+        // console.log(arp)
+        //sshAPI.bgpSummary('bgpsum','1030000001', 2222)
+
         sampleCustomer = {
             name:"Customer A",
             routers:[{
@@ -19,6 +43,7 @@ module.exports = {
                 sap:"1/2/3:1500.*",
                 codification:3570001,
                 ies:false,
+                iesInterface:"",
                 vprn:"1030000001",
                 macAddressLocal:"50:00:00:01:00:04",
                 macAddressRemote:"50:00:00:01:00:03",
@@ -44,6 +69,7 @@ module.exports = {
                 sap:"1/1/1:1501.*",
                 codification:3570002,
                 ies:false,
+                iesInterface:"",
                 vprn:"1040000001",
                 macAddressLocal:"50:00:00:01:00:04",
                 macAddressRemote:"",
