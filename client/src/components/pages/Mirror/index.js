@@ -4,8 +4,6 @@ import DateTime from "react-datetime";
 import Tables from "../../../components/Tables";
 import "./style.css";
 
-
-
 class Mirror extends Component {
   // Setting the initial values for miror information
   state = {
@@ -32,26 +30,25 @@ class Mirror extends Component {
 
   loadMirrors = () => {
     axios
-    .get("/api/mirror")
-    .then(res => this.setState({ mirrorArr: res.data }))
-    .catch(err => console.log(err));
+      .get("/api/mirror")
+      .then(res => this.setState({ mirrorArr: res.data }))
+      .catch(err => console.log(err));
   };
 
   componentDidMount() {
     this.loadMirrors();
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.loadMirrors();
   }
-  
+
   deleteMirror = id => {
     axios
       .delete("/api/mirror/" + id)
       .then(json => this.setState({ mirrorArr: json.data }))
       .catch(err => console.log(err));
   };
-
 
   // When the form is submitted, prevent the default event and alert the username and password
   handleFormSubmit = event => {
@@ -79,7 +76,6 @@ class Mirror extends Component {
     );
   };
 
-
   //DateTime not available for past dates
   valid = current => {
     return current.isAfter(DateTime.moment().subtract(1, "day"));
@@ -88,15 +84,20 @@ class Mirror extends Component {
   //render form and existing miror information
   render() {
     return (
+      
+      
       <div className="row content-container">
-      <h3 className="title">Add A New Mirror</h3>
+      
+      {/* <img className="fit-picture"src=".../components/images/logo.png" alt="logo" /> */}
+
+        <h3 className="title">Add A New Mirror</h3>
         <form
           className="col s12 form-class"
           id="add-mirror"
           onSubmit={this.handleFormSubmit}
         >
           <div className="row">
-            <div className="input-field col s12m m3">
+            <div className="input-field col s12m m4">
               <input
                 placeholder=""
                 id="router-input"
@@ -126,44 +127,38 @@ class Mirror extends Component {
               <label className="dateTimeLabel" htmlFor="expiration">
                 Expiration
               </label>
-              <DateTime 
+              <DateTime
                 onChange={moment =>
                   this.handleDateTimePicker(moment, "expiration")
                 }
                 value={this.state.expiration}
                 isValidDate={this.valid}
-                inputProps={{readOnly:false}}
+                inputProps={{ readOnly: false }}
               />
-              
             </div>
 
             <button
               type="submit"
-              className="btn-floating btn-large scale-transition"
+              className="btn-floating  scale-transition btn"
             >
+            {/* btn-large */}
               <i className="material-icons">add</i>
             </button>
           </div>
         </form>
+       
         {/* <h3 className="title">Current Mirror(s)</h3> */}
-          <div>
-          
+        <div>
+          <h3 className="title">Current Mirror(s)</h3>
           {this.state.mirrorArr.length ? (
-          <Tables
-            mirrorArr={this.state.mirrorArr}
-            deleteMirror={this.deleteMirror}
-          />
-        ) : (
-          <h3>No Current Mirrors</h3>
-        )} 
-
-          </div>
-        
- 
-
-
-
-
+            <Tables
+              mirrorArr={this.state.mirrorArr}
+              deleteMirror={this.deleteMirror}
+            />
+          ) : (
+            <h3>No Current Mirrors</h3>
+          )}
+        </div>
       </div>
     );
   }
