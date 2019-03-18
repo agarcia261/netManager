@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Cards from "../../../components/Cards";
 import axios from "axios";
 import DateTime from "react-datetime";
+import Tables from "../../../components/Tables";
 import "./style.css";
 
 class Mirror extends Component {
@@ -20,7 +20,7 @@ class Mirror extends Component {
   handleInputChange = event => {
     // Pull the name and value properties off of the event.target (the element which triggered the event)
     const { name, value } = event.target;
-    console.log(event.target);
+    // console.log(event.target);
 
     // Set the state for the appropriate input field
     this.setState({
@@ -30,26 +30,25 @@ class Mirror extends Component {
 
   loadMirrors = () => {
     axios
-    .get("/api/mirror")
-    .then(res => this.setState({ mirrorArr: res.data }))
-    .catch(err => console.log(err));
+      .get("/api/mirror")
+      .then(res => this.setState({ mirrorArr: res.data }))
+      .catch(err => console.log(err));
   };
 
   componentDidMount() {
     this.loadMirrors();
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.loadMirrors();
   }
-  
+
   deleteMirror = id => {
     axios
       .delete("/api/mirror/" + id)
       .then(json => this.setState({ mirrorArr: json.data }))
       .catch(err => console.log(err));
   };
-
 
   // When the form is submitted, prevent the default event and alert the username and password
   handleFormSubmit = event => {
@@ -82,17 +81,23 @@ class Mirror extends Component {
     return current.isAfter(DateTime.moment().subtract(1, "day"));
   };
 
+  //render form and existing miror information
   render() {
     return (
-      //render form and miror information
-      <div className="row">
+      
+      
+      <div className="row content-container">
+      
+      {/* <img className="fit-picture"src=".../components/images/logo.png" alt="logo" /> */}
+
+        <h3 className="title">Add A New Mirror</h3>
         <form
           className="col s12 form-class"
           id="add-mirror"
           onSubmit={this.handleFormSubmit}
         >
           <div className="row">
-            <div className="input-field col s12m m3">
+            <div className="input-field col s12m m4">
               <input
                 placeholder=""
                 id="router-input"
@@ -128,37 +133,35 @@ class Mirror extends Component {
                 }
                 value={this.state.expiration}
                 isValidDate={this.valid}
+                inputProps={{ readOnly: false }}
               />
             </div>
 
             <button
               type="submit"
-              className="btn-floating btn-large scale-transition"
+              className="btn-floating  scale-transition btn"
             >
+            {/* btn-large */}
               <i className="material-icons">add</i>
             </button>
           </div>
         </form>
-
-        {this.state.mirrorArr.length ? (
-          <Cards
-            mirrorArr={this.state.mirrorArr}
-            deleteMirror={this.deleteMirror}
-          />
-        ) : (
-          <h3>No Current Mirrors</h3>
-        )}
-
-        {/* display current mirrors */}
-        {/* {this.state.mirrorArr.length ? (
-          <Cards mirrorArr={this.state.mirrorArr}/>
-        ) : (
-          <h3>No Current Mirrors</h3>
-        )} */}
+       
+        {/* <h3 className="title">Current Mirror(s)</h3> */}
+        <div>
+          <h3 className="title">Current Mirror(s)</h3>
+          {this.state.mirrorArr.length ? (
+            <Tables
+              mirrorArr={this.state.mirrorArr}
+              deleteMirror={this.deleteMirror}
+            />
+          ) : (
+            <h3>No Current Mirrors</h3>
+          )}
+        </div>
       </div>
     );
   }
 }
 
-// deleteMirror={this.removeMirror}
 export default Mirror;
