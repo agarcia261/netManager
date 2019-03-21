@@ -50,7 +50,7 @@ class Mirror extends Component {
       .catch(err => console.log(err));
   };
 
-  // When the form is submitted, prevent the default event and alert the username and password
+  // form submission
   handleFormSubmit = event => {
     event.preventDefault();
     // this will be posted within a route the function is not being called
@@ -85,7 +85,7 @@ class Mirror extends Component {
   render() {
     return (
       
-      
+
       <div className="row content-container">
       
       {/* <img className="fit-picture"src=".../components/images/logo.png" alt="logo" /> */}

@@ -306,4 +306,9 @@ th{
   
   .rdtTime td {
 	cursor: default;
-  }
+	}
+	
+	.fit-picture{
+		width: 165px;
+		
+	}
