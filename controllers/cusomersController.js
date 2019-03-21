@@ -1,14 +1,10 @@
 
-
-
-
-
-
 module.exports = {
     getCustomerStatus: (req, res) => {
         sampleCustomer = {
-            name:"Customer A",
+            customerName:"Customer A",
             routers:[{
+            _id: "5c8d26ae2749eebd809c5ad8",
             routerName:"ashb-eqx-r1",
             port:"1/2/3",
             portUp:true,
@@ -34,6 +30,7 @@ module.exports = {
             lastUpdatedOn: new Date()
             },
             {
+            _id: "5c8d26ae2749eebd809c5ad9",
             routerName:"nyk-60h-r1",
             port:"1/1/1",
             portUp:false,
@@ -60,5 +57,6 @@ module.exports = {
             }],
         }
         res.send(sampleCustomer)
-    }
+    },
+    findCustomer:(req, res) =>{}
 }

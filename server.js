@@ -12,6 +12,7 @@ const session = require('express-session')
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public/'));
 
 app.use(session({
   secret: 'secret',
