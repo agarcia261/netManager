@@ -3,7 +3,7 @@ const customer = require("../controllers/customersController");
 
 router.route("/")
    .get(customer.getCustomerStatus)
-   .post(customer.findCustomer);
+  // .post(customer.findCustomer);
 
 // Matches with "/api/mirrors/:id"
  router
