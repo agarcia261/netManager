@@ -1,5 +1,5 @@
 .content-container{
-	width: 960px;
+	width: 1200px; 
 	margin: auto;
 }
 .heading{
@@ -69,13 +69,6 @@
 	margin: 22px;
 }
 
-/* .content-container{
-	padding: 30px;
-	background-color: teal;
-	border: solid 2px gray;
-	text-align: center;
-	color:black;
-} */
 
 .title,
 th{
@@ -84,13 +77,30 @@ th{
 	color: grey;
 }
 
+.btn:focus{
+	background-color: #0091ea;
+}
+
 .btn{
-	margin-left: 70px;
+	margin-left: 50px;
+	background-color: #0091ea;
+}
+
+.input-field input:focus + label {
+	color: #0091ea!important;
+}
+/* label underline focus color */
+.row .input-field input:focus {
+	border-bottom: 1px solid #0091ea !important;
+	box-shadow: 0 1px 0 0 #0091ea !important
 }
 /* Time and date css */
 
 /*!
  * https://github.com/YouCanBookMe/react-datetime
+ */
+/*!
+
  */
 
  .rdt {
@@ -99,9 +109,9 @@ th{
   .rdtPicker {
 	display: none;
 	position: absolute;
-	width: 250px;
-	padding: 4px;
-	margin-top: 1px;
+	width: 450px;
+	padding: 0px;
+	margin-top: 0px;
 	z-index: 99999 !important;
 	background: #fff;
 	box-shadow: 0 1px 3px rgba(0,0,0,.1);
@@ -116,7 +126,7 @@ th{
   }
   
   .rdtPicker .rdtTimeToggle {
-	text-align: center;
+	text-align: left;
   }
   
   .rdtPicker table {
@@ -126,7 +136,7 @@ th{
   .rdtPicker td,
   .rdtPicker th {
 	text-align: center;
-	height: 28px;
+	height: 0px;
   }
   .rdtPicker td {
 	cursor: pointer;
@@ -185,7 +195,7 @@ th{
 	border-bottom: 1px solid #f9f9f9;
   }
   .rdtPicker .dow {
-	width: 14.2857%;
+	/* width: 14.2857%; */
 	border-bottom: none;
 	cursor: default;
   }
@@ -194,7 +204,7 @@ th{
   }
   .rdtPicker th.rdtNext,
   .rdtPicker th.rdtPrev {
-	font-size: 21px;
+	font-size: 12px;
 	vertical-align: top;
   }
   
@@ -309,6 +319,18 @@ th{
 	}
 	
 	.fit-picture{
-		width: 165px;
+		width: 200px;
 		
 	}
+
+	.link{
+		margin-top:20px;
+		margin-right:50px;
+	}
+
+	.topology-img{
+		max-width:180px;
+		margin: auto;
+	}
+
+
