@@ -1,4 +1,5 @@
 module.exports = {
     Mirror: require("./mirrors"),
-    Users: require("./users")
+    Users: require("./users"),
+    Customers: require("./customers")
   };

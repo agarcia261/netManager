@@ -1,8 +1,10 @@
 const router = require("express").Router();
-const customer = require("../controllers/customersController");
+const customer = require("../controllers/customersInventory");
 
 router.route("/")
-   .get(customer.getCustomerStatus)
+   //.get(customer.getCustomerStatus)
+   .get(customer.inventoryCustomers)
+
   // .post(customer.findCustomer);
 
 // Matches with "/api/mirrors/:id"

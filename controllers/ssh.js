@@ -8,7 +8,7 @@ const customerController = require("./customersController")
 // ssh = new node_ssh()
 
 module.exports = {
-    show : (show, vprn, asn,) =>{
+    show : (show, vprn, asn) =>{
         return new Promise((resolve,reject) => {
             let result, command, regex;
 
@@ -28,7 +28,7 @@ module.exports = {
                     regex = /[1-7]\/[1-7]*\/[1-9]*[ ]*[c][n]*[^\r]*/g
                 break;
                 case "sapUsing":
-                    command = "show service sap-using"
+                    command = "show service sap-using | match " +vprn
                     // regex =/[1-7]\/[1-7]*\/[1-9]*\:[0-9|*]*\.\*[^\r]/
                     regex=/[1-7]\/[1-7]*\/[1-9]*\:[0-9|*]*[.][*]*[^\r]*/g
                 break;
@@ -60,6 +60,7 @@ module.exports = {
                         conn.end();
 
                         let resu = datatobSent.match(regex)
+                        //console.log(resu)
 
                         function splitArrays (array){
                             for (let i=0; i<array.length; i++){
@@ -104,14 +105,24 @@ module.exports = {
                                     case "portdesc":
                                     custName= tempArray[1].match(/[c][n][=][A-Z]*\/[A-Z]*/g).toString().slice(3)
                                     ipxAccess = tempArray[1].match(/[A|B][#]\d*/).toString().slice(2)  
-                                    result = {
-                                        customerName:custName,
-                                        port:tempArray[0],
-                                        ipxAccess:ipxAccess
+                                    if (i==0){
+                                        result = [{
+                                            customerName:custName,
+                                            port:tempArray[0],
+                                            ipxAccess:ipxAccess
+                                        }]
+                                    }
+                                    else{
+                                        result.push({
+                                            customerName:custName,
+                                            port:tempArray[0],
+                                            ipxAccess:ipxAccess
+                                        })
                                     }
                                     // console.log(tempArray)
                                     break
                                     case "sapUsing":
+                                    //console.log(tempArray)
                                     if (i==0){
                                         result= [{
                                             sap:tempArray[0],
@@ -156,6 +167,7 @@ module.exports = {
                             }
                             
                         }
+                        //console.log(resu)
                         splitArrays(resu)
                         
                         resolve(result)
@@ -167,7 +179,7 @@ module.exports = {
 
                     .on('data', data => {
                         datatobSent = datatobSent + data;
-                        //console.log(""+data)
+                        // console.log(""+data)
                     })
                     .stderr.on('data', data => {
                         console.log('STDERR: ' + data);

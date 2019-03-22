@@ -1,6 +1,4 @@
 const sshAPI = require("./ssh")
-const axios = require('axios')
-
 
 module.exports = {
     getCustomerStatus: (req, res) => {
