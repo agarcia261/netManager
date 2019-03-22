@@ -79,12 +79,7 @@ class Main extends Component {
   render() {
     return (
       <div className="row content-container">
-        {/* <img
-          class="fit-picture"
-          src="/images/logo.png"
-          alt="logo"
-        /> */}
-
+       
         <h3 className="title">Search for Customer</h3>
         <form
           className="col s12 form-class"
@@ -117,7 +112,7 @@ class Main extends Component {
           {this.state.customerArr.length ? (
             <Maintable customerArr={this.state.customerArr} />
           ) : (
-            <h3>xxxx</h3>
+            <h3> </h3>
           )}
         </div>
       </div>

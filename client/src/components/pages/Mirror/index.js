@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import DateTime from "react-datetime";
+// import moment  from ('moment').default
 import Tables from "../../../components/Tables";
 import "./style.css";
 
@@ -84,12 +85,7 @@ class Mirror extends Component {
   //render form and existing miror information
   render() {
     return (
-      
-
       <div className="row content-container">
-      
-      {/* <img className="fit-picture"src=".../components/images/logo.png" alt="logo" /> */}
-
         <h3 className="title">Add A New Mirror</h3>
         <form
           className="col s12 form-class"
@@ -123,31 +119,25 @@ class Mirror extends Component {
               <label htmlFor="sap">Sap or IP-Filter</label>
             </div>
 
-            <div className="input col s12 m3">
-              <label className="dateTimeLabel" htmlFor="expiration">
+            <div className="input input-field col s12 m3">
+              <label className="dateTimeLabel active" htmlFor="expiration">
                 Expiration
               </label>
-              <DateTime
+              <DateTime 
                 onChange={moment =>
                   this.handleDateTimePicker(moment, "expiration")
                 }
                 value={this.state.expiration}
                 isValidDate={this.valid}
-                inputProps={{ readOnly: false }}
+                inputProps={{readOnly:"readonly"}} 
+                // inputProps={{input: true}}
               />
             </div>
-
-            <button
-              type="submit"
-              className="btn-floating  scale-transition btn"
-            >
-            {/* btn-large */}
+            <button type="submit" className="btn-floating scale-transition btn">
               <i className="material-icons">add</i>
             </button>
           </div>
         </form>
-       
-        {/* <h3 className="title">Current Mirror(s)</h3> */}
         <div>
           <h3 className="title">Current Mirror(s)</h3>
           {this.state.mirrorArr.length ? (
@@ -156,7 +146,7 @@ class Mirror extends Component {
               deleteMirror={this.deleteMirror}
             />
           ) : (
-            <h3>No Current Mirrors</h3>
+            <h3 className="title">No Current Mirrors</h3>
           )}
         </div>
       </div>

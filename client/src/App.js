@@ -10,8 +10,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          
+        <div>  
           <Nav/>
           <Route exact path="/" component={Main} />
           <Route exact path="/mirror" component={Mirror} />
