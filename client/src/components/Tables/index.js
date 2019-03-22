@@ -6,7 +6,7 @@ import "./style.css";
 function Tables(props) {
   return (
     <div className="row">
-      <table class="highlight responsive-table">
+      <table className="highlight responsive-table hoverable">
       <thead>
         <tr>
           <th>Router</th>
