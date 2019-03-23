@@ -62,7 +62,7 @@ module.exports = {
                         let resu = datatobSent.match(regex)
                         //console.log(resu)
 
-                         splitArrays array => {
+                         splitArrays = array => {
                             for (let i=0; i<array.length; i++){
                                 let tempArray = array[i].split(" ")
                                 tempArray = tempArray.filter(function (el) {
