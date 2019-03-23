@@ -65,7 +65,7 @@ module.exports = {
                          splitArrays = array => {
                             for (let i=0; i<array.length; i++){
                                 let tempArray = array[i].split(" ")
-                                tempArray = tempArray.filter(function (el) {
+                                tempArray = tempArray.filter( el => {
                                     return el != '';
                                 })
                                 switch(show) {
