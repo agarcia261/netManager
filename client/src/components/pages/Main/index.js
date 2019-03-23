@@ -48,12 +48,13 @@ class Main extends Component {
     const search = {
       customerSearch: this.state.customerSearch
     };
-    // console.log(search);
+     console.log(search);
     return axios
-    .get("/api/main")
-    .then(res => {
+      .post("/api/main", search)
+      .then(res =>{
+        console.log(res)
+
       if (res.data.hasData){}
-      console.log(res)
         this.setState({
           customerArr: res.data.routers,
           customerName:res.data.customerName
