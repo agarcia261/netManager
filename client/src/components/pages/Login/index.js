@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Maintable from "../../../components/Maintable";
 import "./style.css";
 
-class Main extends Component {
+class Login extends Component {
   // Setting the initial values for main page information
   state = {
-    customerName: "",
-    customerSearch: "",
-    customerArr: []
+    Username: "",
+    Password: ""
   };
 
  
@@ -26,26 +24,26 @@ class Main extends Component {
   // User submit search to get customer name
   handleFormSubmit = event => {
     event.preventDefault();
-    // console.log(this.state.customerSearch)
-    const search = {
-      customerSearch: this.state.customerSearch
+    const login = {
+        Username: this.state.Username,
+        Password: this.state.Password
     };
-    // console.log(search);
+    console.log(login);
     return axios
-    .get("/api/main")
+    .post("/login")
     .then(res => {
       if (res.data.hasData){}
       console.log(res)
         this.setState({
-          customerArr: res.data.routers,
-          customerName:res.data.customerName
+            Username: this.state.Username,
+            Password: this.state.Password
         })
       })
-
       .catch(err => console.log(err))
       .then(
         this.setState({
-          customerSearch: ""
+            Username: " ",
+            Password: " "
         })
       );
   };
@@ -55,7 +53,7 @@ class Main extends Component {
     return (
       <div className="row content-container">
        
-        <h3 className="title">Search for Customer</h3>
+        <h3 className="title">Enter Credentials</h3>
         <form
           className="col s12 form-class"
           id="add-customer"
@@ -65,14 +63,27 @@ class Main extends Component {
             <div className="input-field col s12m m4">
               <input
                 placeholder=""
-                id="customer-name"
+                id="username"
                 type="text"
-                name="customerSearch"
+                name="Username"
                 className="autocomplete"
-                value={this.state.customerSearch}
+                value={this.state.Username}
                 onChange={this.handleInputChange}
               />
-              <label htmlFor="customerName">Customer Name</label>
+              <label htmlFor="Username">Username</label>
+            </div>
+
+            <div className="input-field col s12m m4">
+              <input
+                placeholder=""
+                id="password"
+                type="text"
+                name="Password"
+                className="autocomplete"
+                value={this.state.Password}
+                onChange={this.handleInputChange}
+              />
+              <label htmlFor="Password">Password</label>
             </div>
             <button
               type="submit"
@@ -84,18 +95,15 @@ class Main extends Component {
         </form>
 
         <div>
-          {this.state.customerArr.length ? (
-            <Maintable 
-            customerArr={this.state.customerArr} 
-            customerName={this.state.customerName}
-            />
-          ) : (
-            <h3> </h3>
-          )}
+         {/* Dwhat's next?*/}
         </div>
       </div>
     );
   }
 }
 
-export default Main;
+
+
+export default Login;
+
+{/* <script src="/javascript/users.js"></script> */}

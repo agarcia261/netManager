@@ -1,0 +1,49 @@
+<div class="register-container">
+
+        <form class="col s12" id="register-user">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="first_name" type="text" class="validate" value = {{firstName}}>
+                    <label for="first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="last_name" type="text" class="validate" value = {{lastName}}>
+                    <label for="last_name">Last Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="perID" type="text" class="validate" value = {{perID}}>
+                    <label for="perID">ID</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="email" type="email" class="validate" value = {{email}}>
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="input-field col s6">
+                    <input id="role" type="text" class="validate" value = {{role}}>
+                    <label for="role">Role</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="password" type="password" class="validate" value = {{password}}>
+                    <label for="password">Password</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="password2" type="password" class="validate" value = {{password2}}>
+                    <label for="password2">Verify Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light center-align" type="submit" name="action">Register
+                        <i class="material-icons right">send</i>
+                    </button>        
+                </div>
+            </div>
+        </form>
+</div>
+
+ <script src="/javascript/users.js"></script>
