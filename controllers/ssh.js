@@ -183,7 +183,7 @@ module.exports = {
 
         
             .connect({
-                host: '10.0.0.240' || process.env.ROUTER_HOSTNAME,
+                host: process.env.ROUTER_HOSTNAME,
                 port: 22,
                 username: process.env.ROUTER_USERNAME,
                 password: process.env.ROUTER_PASSWORD,
