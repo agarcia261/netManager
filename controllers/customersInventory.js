@@ -57,6 +57,7 @@ module.exports = {
                                     }],
                                 }]
                             }
+                            console.log(response)
                             db.Customers.findOneAndUpdate({ customerName: response.customerName }, response, {upsert: true})
                             .then(dbModel => console.log("Customer "+ apiResponse[0][i].customerName + " inventory complete"))
                             .catch(err => console.log(err))//res.status(422).json(err));
