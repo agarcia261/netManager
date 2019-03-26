@@ -1,11 +1,5 @@
 
 const Client = require('ssh2').Client;
-const db = require('../models')
-const fs = require('fs')
-const customerController = require("./customersController")
-// path = require('path')
-// node_ssh = require('node-ssh')
-// ssh = new node_ssh()
 
 module.exports = {
     show : (show, vprn, asn) =>{
@@ -13,6 +7,10 @@ module.exports = {
             let result, command, regex;
 
             switch(show) {
+                case "adminBGPneighInfo":
+                command = "admin display-config | match "+vprn+" context all | match bgp context children | match neighbor context children "
+                regex = /peer-as \d*/
+                break
                 case "arp":
                     command = "show router " + vprn +" arp"
                     regex = /(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[^\r]*/g
@@ -21,7 +19,7 @@ module.exports = {
                 case "bgpsum":
                     command = "show router " + vprn +" bgp summary"
                     const expr = asn+"[^\r]*";
-                    regex = new RegExp(expr,"g")  
+                    regex = new RegExp(expr,"g") 
                 break;
                 case "portdesc":
                     command = "show port description"
@@ -44,10 +42,7 @@ module.exports = {
                 default:
                 // code block
             }
-            
-            // function returnFunction(input){
-            //     return cb(result)
-            // }            
+           
             const conn = new Client();
             conn.on('ready', () => {
                 console.log('Client :: ready');    
@@ -60,7 +55,6 @@ module.exports = {
                         conn.end();
 
                         let resu = datatobSent.match(regex)
-                        //console.log(resu)
 
                          splitArrays = array => {
                             for (let i=0; i<array.length; i++){
@@ -69,6 +63,12 @@ module.exports = {
                                     return el != '';
                                 })
                                 switch(show) {
+                                    case "adminBGPneighInfo":
+                                    result = {
+                                        asn:tempArray[1]
+                                    }
+                    
+                                    break;
                                     case "arp":
                                         if (i==0){
                                             result = {
@@ -119,10 +119,8 @@ module.exports = {
                                             ipxAccess:ipxAccess
                                         })
                                     }
-                                    // console.log(tempArray)
                                     break
                                     case "sapUsing":
-                                    //console.log(tempArray)
                                     if (i==0){
                                         result= [{
                                             sap:tempArray[0],
@@ -158,28 +156,22 @@ module.exports = {
                                         result = {
                                             serviceCodification:tempArray[2]
                                         }
-                                       // console.log(result)
                                     break
                                     default:
-                                    // code block
+                                    console.log(show + " command did not match any criteria")
                                 }
 
                             }
                             
                         }
-                        //console.log(resu)
                         splitArrays(resu)
                         
                         resolve(result)
-                        // console.log(`data: ${result}`)
-                        // return cb(result)
-                        // console.log(result)
-                        // returnFunction(result)
+
                     })
 
                     .on('data', data => {
                         datatobSent = datatobSent + data;
-                        // console.log(""+data)
                     })
                     .stderr.on('data', data => {
                         console.log('STDERR: ' + data);

@@ -6,6 +6,7 @@ module.exports = {
         let cust = req.body.customerSearch;
         db.Customers.find({customerName:cust})
         .then(response => {
+            console.log(response)
             res.json(response)
         })
 
