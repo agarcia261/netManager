@@ -69,7 +69,7 @@ app.get("*", (req, res) => {
 
 inventory.inventoryCustomers()
 
-setInterval(inventory.inventoryCustomers, 150000)
+setInterval(inventory.inventoryCustomers, 300000)
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/netmanager";
 console.log(MONGODB_URI)

@@ -80,26 +80,42 @@ module.exports = {
                                                         type:tempArray[3],
                                                         interface:tempArray[4]
                                                     },
-                                                    destination:{arpStatus:false}
+                                                    destination:{
+                                                        macReceived:false,
+                                                        macAddress:"No MAC received",
+                                                        arpStatusCSS:"red"
+                                                    }
                                                 }
                                             }
                                         }
                                         else{
-                                            result.arp.destination.ipAddress=tempArray[0], 
-                                            result.arp.destination.macAddress=tempArray[1],
-                                            result.arp.destination.expires=tempArray[2],
-                                            result.arp.destination.type=tempArray[3],
-                                            result.arp.destination.interface=tempArray[4]
-                                            result.arp.destination.arpStatus=true
+                                            result.arp.destination.ipAddress=tempArray[0]; 
+                                            result.arp.destination.macAddress=tempArray[1];
+                                            result.arp.destination.expires=tempArray[2];
+                                            result.arp.destination.type=tempArray[3];
+                                            result.arp.destination.interface=tempArray[4];
+                                            result.arp.destination.macReceived=true;
+                                            result.arp.destination.arpStatusCSS="";
                                         }                                   
                                         break;
                                     case "bgpsum":
+                                        let bgpCSS=""
+                                        if (/\d*\/\d*\/\d*/.test(tempArray[4])){
+                                            console.log("It's a matched!!!")
+                                        }
+                                        else{
+                                            console.log("It does NOT match")
+                                            bgpCSS="red"
+
+                                        }
+
                                         result = {
                                             peerASN:tempArray[0],
-                                            PktRcvd:tempArray[1],
-                                            UpDown:tempArray[3],
+                                            pktRcvd:tempArray[1],
+                                            upDown:tempArray[3],
                                             summary:tempArray[4],
-                                            familyAddr:tempArray[5]
+                                            familyAddr:tempArray[5],
+                                            bgpStatusCSS:bgpCSS
                                         }                                  
                                         break;
                                     case "portdesc":
