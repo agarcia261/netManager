@@ -24,7 +24,7 @@ callback = (error, response, body) =>{
     }
 }
 
-request(options, callback);
+// request(options, callback);
 
 
 // Define middleware here
