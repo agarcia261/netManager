@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const passport = require('passport')
 const session = require('express-session')
+const inventory = require('./controllers/customersInventory')
 const request = require('request');
 
 const options = {
@@ -65,6 +66,10 @@ app.use(routes);
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
+
+inventory.inventoryCustomers()
+
+setInterval(inventory.inventoryCustomers, 150000)
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/netmanager";
 console.log(MONGODB_URI)
