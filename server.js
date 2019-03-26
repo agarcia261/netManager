@@ -7,6 +7,23 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const passport = require('passport')
 const session = require('express-session')
+const request = require('request');
+
+const options = {
+    proxy: process.env.QUOTAGUARDSTATIC_URL,
+    url: 'http://ip.jsontest.com/',
+    headers: {
+        'User-Agent': 'node.js'
+    }
+};
+
+callback = (error, response, body) =>{
+    if (!error && response.statusCode == 200) {
+        console.log(body);
+    }
+}
+
+request(options, callback);
 
 
 // Define middleware here
