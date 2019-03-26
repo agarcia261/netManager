@@ -4,7 +4,7 @@ const db = require("../models")
 module.exports = {
     getCustomerStatus: (req, res) => {
         let cust = req.body.customerSearch;
-        db.Customers.find({customerName:cust})
+        db.Customers.findOne({customerName:cust})
         .then(response => {
             res.json(response)
         })
