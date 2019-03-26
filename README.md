@@ -1,29 +1,9 @@
-# Create React Express App
+# netManager
 
-## About This Boilerplate
+### Overview
+NetManager is a tool that allows NOC engineers to troubleshoot an Internet Service Provider Core's network.
+The app will interface with the routers of an Internet Service Provider’s backbone and will allow the network engineers to quickly get the status of the customer inter-connection visually.  The application will be able to retrieve customer information independently of the vendor.  The App will aggregate information from different layers of the internet protocol stack
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+NetManager will expedite troubleshooting by aggregating all relevant information on a single place. This will save time and cost of training by providing an intuitive graphical vendor-neutral interface to the network.
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
-
-## Starting the app locally
-
-Start by installing front and backend dependencies. While in this directory, run the following command:
-
-```
-npm install
-```
-
-This should install node modules within the server and the client folder.
-
-After both installations complete, run the following command in your terminal:
-
-```
-npm start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+The app is deloyed on [Heroku](https://columbia-netmanager.herokuapp.com)
