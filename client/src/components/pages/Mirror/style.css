@@ -1,5 +1,5 @@
 .content-container{
-	width: 1200px; 
+	width: 1400px; 
 	margin: auto;
 }
 .heading{
@@ -96,6 +96,19 @@ th{
 	border-bottom: 1px solid #0091ea !important;
 	box-shadow: 0 1px 0 0 #0091ea !important
 }
+
+.mainTable{
+	width:830px;
+	text-align: center;
+}
+.custRoutName{
+	text-align: center;
+}
+
+
+
+
+
 
 /* Time and date css */
 

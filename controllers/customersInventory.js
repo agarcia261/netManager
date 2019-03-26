@@ -3,16 +3,19 @@ const db = require("../models")
 
 module.exports = {
     inventoryCustomers: (req, res) => {
+
         Promise.all([
             sshAPI.show('portdesc'),
         ])
         .then(apiResponse => {
 
             for (let i=0; i<apiResponse[0].length; i++){
+
                 Promise.all([
                     sshAPI.show('sapUsing', apiResponse[0][i].port),
                 ])
                 .then(resp => {
+
                     //Here I'll get the asn from the configuration in the router
                     //this is based on the service ID
                     Promise.all([sshAPI.show('adminBGPneighInfo', resp[0][0].serviceID)])
