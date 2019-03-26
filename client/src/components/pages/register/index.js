@@ -188,7 +188,3 @@ class Register extends Component {
 }
 
 export default Register;
-
-{
-  /* <script src="/javascript/users.js"></script> */
-}

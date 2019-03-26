@@ -105,5 +105,3 @@ class Login extends Component {
 
 
 export default Login;
-
-{/* <script src="/javascript/users.js"></script> */}

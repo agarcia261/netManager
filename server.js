@@ -7,6 +7,24 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const passport = require('passport')
 const session = require('express-session')
+const inventory = require('./controllers/customersInventory')
+const request = require('request');
+
+const options = {
+    proxy: process.env.QUOTAGUARDSTATIC_URL,
+    url: 'http://ip.jsontest.com/',
+    headers: {
+        'User-Agent': 'node.js'
+    }
+};
+
+callback = (error, response, body) =>{
+    if (!error && response.statusCode == 200) {
+        console.log(body);
+    }
+}
+
+// request(options, callback);
 
 
 // Define middleware here
@@ -48,6 +66,10 @@ app.use(routes);
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
+
+inventory.inventoryCustomers()
+
+setInterval(inventory.inventoryCustomers, 300000)
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/netmanager";
 console.log(MONGODB_URI)

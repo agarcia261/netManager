@@ -4,21 +4,44 @@ const db = require("../models")
 module.exports = {
     getCustomerStatus: (req, res) => {
         let cust = req.body.customerSearch;
+
         db.Customers.findOne({customerName:cust})
         .then(response => {
-            res.json(response)
-        })
+            let responsetoSend =response
+            for (let i=0; i<response.routers.length; i++){
+
+                console.log(response.routers[i].services)
+
+                for (let j=0; j<response.routers.length; j++){
+                    let srvID=response.routers[i].services[j].serviceID;
+                    let asn = response.routers[i].services[j].bgp.peerASN;
+
+                    Promise.all([
+                        sshAPI.show('arp',srvID),
+                        sshAPI.show('bgpsum',srvID,asn),
+                    ])
+                    .then(apiResponse => {
+                        console.log(apiResponse)
+                        responsetoSend.routers[i].services[j].arp = apiResponse[0].arp;
+                        responsetoSend.routers[i].services[j].bgp.pktRcvd=apiResponse[1].pktRcvd;
+                        responsetoSend.routers[i].services[j].bgp.upDown=apiResponse[1].upDown;
+                        responsetoSend.routers[i].services[j].bgp.summary=apiResponse[1].summary;
+                        responsetoSend.routers[i].services[j].bgp.bgpStatusCSS=apiResponse[1].bgpStatusCSS;
+
+                        
+                        if (i==response.routers.length-1){
+                            res.send (responsetoSend)
+                        }
+
+                    })
+                }
+
+            }
 
 
-        // Promise.all([
-        //     sshAPI.show('arp','1030000001',undefined),
-        //     sshAPI.show('bgpsum','1030000001',2222),
-        //     sshAPI.show('portdesc'),
-        //     sshAPI.show('sapUsing'),
-        //     sshAPI.show('serviceUsing', '1030000001'),
-        //     sshAPI.show('serviceIDBase', '1030000001')
-        // ])
-        // .then((apiResponse) => {
+
+    })
+
         //     // console.log(apiResponse[3])
         //     response = {
         //         customerName:apiResponse[2].customerName,
