@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./style.css";
+// import "./style.css";
 
 class Login extends Component {
   // Setting the initial values for main page information
@@ -21,7 +21,7 @@ class Login extends Component {
     });
   };
 
-  // User submit search to get customer name
+  // User submit user credentials
   handleFormSubmit = event => {
     event.preventDefault();
     const login = {
@@ -30,7 +30,7 @@ class Login extends Component {
     };
     console.log(login);
     return axios
-    .post("/login")
+    .get("/login")
     .then(res => {
       if (res.data.hasData){}
       console.log(res)
