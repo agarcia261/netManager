@@ -2,61 +2,159 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CustomerSchema = new Schema({
-    name:{
+    customerName:{
         type:String,
-        required:true
+        required:true,
+        unique:true
+
     },
     routers:[{
         routerName:{
             type:String,
+            required:true
         },
         port:{
             type:String,
+            required:true
         },
         portUp:{
-            type:Boolean
+            type:Boolean,
+            default:false
         },
         portRxdBm:{
-            type:Number
+            type:Number,
+            default:-6
         },
         portTxdBm:{
-            type:Number
+            type:Number,
+            default:-3
         },
         ipxAccess:{
             type:Number,
             require:true
+        },
+        ipxAccessCSS:{
+            type:String,
+            default:""
         },        
         services:[{
             sap:{
                 type:String,
+                default:""
             },
             codification:{
-                type:Number
+                type:Number,
+                default:0
             },
-            ies:{
-                type:Boolean,
-                default:false
+            serviceType:{
+                type:String,
+                default:""
             },
-            vprn:{
-                type:Number
+            serviceID:{
+                type:Number,
+                default:0
             },
-            macAddressLocal:{
-                type:String
+            serviceAdminStatus:{
+                type:String,
+                default:""
             },
-            macAddressRemote:{
-                type:String
+            serviceOperationalStatus:{
+                type:String,
+                default:""
             },
-            localIP:{
-                type:String
+            sapStatusCSS:{
+                type:String,
+                default:""
             },
-            remoteIP:{
-                type:String
+            arp:{
+                source:{
+                    ipAddress:{
+                        type:String,
+                        default:""
+                    },
+                    macAddress:{
+                        type:String,
+                        default:""
+                    },
+                    expires:{
+                        type:String,
+                        default:""
+                    },
+                    type:{
+                        type:String,
+                        default:""
+                    },
+                    interface:{
+                        type:String,
+                        default:""
+                    }
+                },
+                destination:{
+                    arpStatus:{
+                        type:Boolean,
+                        default:false
+                    },
+                    ipAddress:{
+                        type:String,
+                        default:""
+                    },
+                    macAddress:{
+                        type:String,
+                        default:""
+                    },
+                    expires:{
+                        type:String,
+                        default:""
+                    },
+                    type:{
+                        type:String,
+                        default:""
+                    },
+                    interface:{
+                        type:String,
+                        default:""
+                    },
+                    arpDestStatusCSS:{
+                        type:String,
+                        default:""
+                    }
+                },
             },
-            bgpSummary:{
-                type:String
-            },
-            bgpRoutes:{
-                type:String
+            bgp:{
+                peerASN:{
+                    type:Number,
+                    default:0
+                },
+                pktRcvd:{
+                    type:Number,
+                    default:0
+                },
+                summary:{
+                    type:String,
+                    default:""
+                },
+                familyAddr:{
+                    type:String,
+                    default:""
+                },
+                bgpRoutes:{
+                    received:{
+                        type:String,
+                        default:""
+                    },
+                    active:{
+                        type:String,
+                        default:""
+                    },
+                    advertised:{
+                        type:String,
+                        default:""
+                    }
+                },
+                bgpStatusCSS:{
+                    type:String,
+                    default:""
+                }
             },
             avrTraffiOut:Number,
             avrTrafficIn:Number,
@@ -65,7 +163,6 @@ const CustomerSchema = new Schema({
                 default:false
             }
         }]
-
     }],
     createdOn:{
         type:Date,
