@@ -100,10 +100,12 @@ module.exports = {
                                         break;
                                     case "bgpsum":
                                         let bgpCSS=""
+
+                                        //first I'll check if the received, active and sent routes are there
                                         if (/\d*\/\d*\/\d*/.test(tempArray[4])){
-                                            console.log("It's a matched!!!")
                                         }
                                         else{
+                                            //if bgp is in active/connect state then we send a red to the css
                                             console.log("It does NOT match")
                                             bgpCSS="red"
 
