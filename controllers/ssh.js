@@ -80,26 +80,44 @@ module.exports = {
                                                         type:tempArray[3],
                                                         interface:tempArray[4]
                                                     },
-                                                    destination:{arpStatus:false}
+                                                    destination:{
+                                                        macReceived:false,
+                                                        macAddress:"No MAC received",
+                                                        arpStatusCSS:"red"
+                                                    }
                                                 }
                                             }
                                         }
                                         else{
-                                            result.arp.destination.ipAddress=tempArray[0], 
-                                            result.arp.destination.macAddress=tempArray[1],
-                                            result.arp.destination.expires=tempArray[2],
-                                            result.arp.destination.type=tempArray[3],
-                                            result.arp.destination.interface=tempArray[4]
-                                            result.arp.destination.arpStatus=true
+                                            result.arp.destination.ipAddress=tempArray[0]; 
+                                            result.arp.destination.macAddress=tempArray[1];
+                                            result.arp.destination.expires=tempArray[2];
+                                            result.arp.destination.type=tempArray[3];
+                                            result.arp.destination.interface=tempArray[4];
+                                            result.arp.destination.macReceived=true;
+                                            result.arp.destination.arpStatusCSS="";
                                         }                                   
                                         break;
                                     case "bgpsum":
+                                        let bgpCSS=""
+
+                                        //first I'll check if the received, active and sent routes are there
+                                        if (/\d*\/\d*\/\d*/.test(tempArray[4])){
+                                        }
+                                        else{
+                                            //if bgp is in active/connect state then we send a red to the css
+                                            console.log("It does NOT match")
+                                            bgpCSS="red"
+
+                                        }
+
                                         result = {
                                             peerASN:tempArray[0],
-                                            PktRcvd:tempArray[1],
-                                            UpDown:tempArray[3],
+                                            pktRcvd:tempArray[1],
+                                            upDown:tempArray[3],
                                             summary:tempArray[4],
-                                            familyAddr:tempArray[5]
+                                            familyAddr:tempArray[5],
+                                            bgpStatusCSS:bgpCSS
                                         }                                  
                                         break;
                                     case "portdesc":
@@ -183,7 +201,7 @@ module.exports = {
 
         
             .connect({
-                host: '10.0.0.240' || process.env.ROUTER_HOSTNAME,
+                host: process.env.ROUTER_HOSTNAME,
                 port: 22,
                 username: process.env.ROUTER_USERNAME,
                 password: process.env.ROUTER_PASSWORD,

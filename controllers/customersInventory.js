@@ -45,7 +45,7 @@ module.exports = {
                                         sap:resp[0][0].sap,
                                         codification:ans[1].serviceCodification,
                                         serviceType:ans[0].serviceType,
-                                        serviceID:ans[1].serviceCodification,
+                                        serviceID:resp[0][0].serviceID,
                                         serviceAdminStatus:resp[0][0].adminStatus,
                                         serviceOperatinalStatus:resp[0][0].operationalStatus,
                                         arp:ans[2].arp,
@@ -68,7 +68,7 @@ module.exports = {
             }
 
         })
-        res.send("OK")
+        // res.send("OK")
 
             
 

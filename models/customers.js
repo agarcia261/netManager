@@ -114,7 +114,7 @@ const CustomerSchema = new Schema({
                         type:String,
                         default:""
                     },
-                    arpDestStatusCSS:{
+                    arpStatusCSS:{
                         type:String,
                         default:""
                     }

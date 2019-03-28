@@ -35,7 +35,7 @@ function Maintable(props) {
                   <tr key={customer._id}>
                     <td>{customer.services[0].sap}</td>
                     <td>{customer.services[0].codification}</td>
-                    <td>{customer.services[0].bgp.summary}</td>
+                    <td className={customer.services[0].bgp.bgpStatusCSS}>{customer.services[0].bgp.summary}</td>
                     <td>
                       {customer.services[0].avrTrafficIn}/
                       {customer.services[0].avrTraffiOut}
