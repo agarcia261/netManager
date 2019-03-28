@@ -146,7 +146,7 @@ class Mirror extends Component {
               deleteMirror={this.deleteMirror}
             />
           ) : (
-            <h3 className="title">No Current Mirrors</h3>
+            <h3 className="title"> </h3>
           )}
         </div>
       </div>
