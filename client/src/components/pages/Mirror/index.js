@@ -14,8 +14,12 @@ class Mirror extends Component {
     mirrorArr: []
   };
 
-  handleDateTimePicker = (moment, name) =>
+  handleDateTimePicker = (moment, name) =>{
+    console.log(moment)
     this.setState({ [name]: moment.toDate() });
+
+  }
+ 
 
   // handle any changes to the input fields
   handleInputChange = event => {
