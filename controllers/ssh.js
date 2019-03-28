@@ -106,11 +106,8 @@ module.exports = {
                                         }
                                         else{
                                             //if bgp is in active/connect state then we send a red to the css
-                                            console.log("It does NOT match")
                                             bgpCSS="red"
-
                                         }
-
                                         result = {
                                             peerASN:tempArray[0],
                                             pktRcvd:tempArray[1],
@@ -139,6 +136,8 @@ module.exports = {
                                     }
                                     break
                                     case "sapUsing":
+                                    console.log(tempArray)
+                                    console.log(i)
                                     if (i==0){
                                         result= [{
                                             sap:tempArray[0],
@@ -162,6 +161,7 @@ module.exports = {
                                             adminStatus:tempArray[6],
                                             operationalStatus:tempArray[7]
                                         })
+                                        console.log(result)
                                     }
 
                                     break
