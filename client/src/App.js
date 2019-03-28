@@ -4,7 +4,7 @@ import Nav from "./components/Nav";
 import Mirror from "./components/pages/Mirror";
 import Main from "./components/pages/Main";
 import Login from "./components/pages/Login";
-import Register from "./components/pages/register";
+import Register from "./components/pages/Register";
 import "./App.css";
 
 

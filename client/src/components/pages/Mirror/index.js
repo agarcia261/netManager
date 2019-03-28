@@ -139,14 +139,14 @@ class Mirror extends Component {
           </div>
         </form>
         <div>
-          <h3 className="title">Current Mirror(s)</h3>
+        <h3 className="title">Current Mirror(s)</h3>
           {this.state.mirrorArr.length ? (
             <Tables
               mirrorArr={this.state.mirrorArr}
               deleteMirror={this.deleteMirror}
             />
           ) : (
-            <h3 className="title">No Current Mirrors</h3>
+            <h3 className="title"> </h3>
           )}
         </div>
       </div>
